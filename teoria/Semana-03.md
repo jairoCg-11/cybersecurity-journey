@@ -134,8 +134,8 @@ Resposta rápida, sem timeout, apenas como o IP correto.
 
 ## Checklist da semana
 
--[x] Entendi como o DNS resolve nomes em IPs, incluindo tipos de registro (A, AAAA, PTR)
--[x] Entendi o processo DORA do DHCP e identifiquei o servidor DHCP da rede (VirtualBox)
+- [x] Entendi como o DNS resolve nomes em IPs, incluindo tipos de registro (A, AAAA, PTR)
+- [x] Entendi o processo DORA do DHCP e identifiquei o servidor DHCP da rede (VirtualBox)
 - [x] Memorizei portas padrão dos principais protocolos e testei com nmap
 - [x] Aprendi a diferença entre scan padrão e scan completo de portas no nmap
 - [x] Capturei tráfego DNS ao vivo com tcpdump
