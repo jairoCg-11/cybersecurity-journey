@@ -47,7 +47,7 @@ Resultado: conexão TCP + handshake TLS + resposta HTTP completo ("Connetion ...
 O que e eu fiz: Simulei uma tentativa de login com senha errada no WIN11-CLIENT e verifiquei a captura no dashboard do Wazuh (Discover, filtro agent.name: WIN11-CLIENT)
 
 Evento capturado:
- - Event ID Windows: 4526 (falha de logon)
+ - Event ID Windows: 4625 (falha de logon)
  - rule.description: "Logon Failure - Unknown user or bad password
  - rule.level: 5
  - logonType: 2 (interativo, direto no teclado da máquina)

@@ -7,7 +7,7 @@ Fase: 1 - Fundamentos
 ## O que estudei essa semana
 
 ### DNS (Domain Name Sistem)
-- Função: traduzir nomes (lab.local) em endereços IP
+- Função: trad uzir nomes (lab.local) em endereços IP
 - Hieraquia: root servers -> TLD -> domínio -> registro específico
 - Tipos de registro: A (nome->IPv4), AAAA (nome-> IPv6), CNAME (apelido), PTR(IP->nome, reverso)
 - No meu lab: o DC01 atua como servidor DNS autoritativo do domíno lab.local.
