@@ -8,18 +8,17 @@ Ferramentas: Wazuh (dashboard/Discover), Sysmon, auth.log, Kali Linux
 
 ## 1. Objetivo
 
-Gerar tentativas de login com falha em dois sistemas diferntes e comparar como casa um registra o evento, para treinar a leitura de log de autenticação, que é uma das tarefas mais comuns de um analista SOC N1.
+Gerar tentativas de login com falha em dois sistemas diferentes e comparar como cada um registra o evento, para treinar a leitura de log de autenticação, que é uma das tarefas mais comuns de um analista SOC N1.
 
 ## 2. Cenário
 
 | Sistema | Papel | IP |
 |---|---|---|
-| WIN11-CLIENT | Cliente Windows 11, no domínio lab.local, monitorado por Sysmon + agente wazuh
-| 192.168.56.11 |
+| WIN11-CLIENT | Cliente Windows 11, no domínio lab.local, monitorado por Sysmon + agente wazuh | 192.168.56.11 |
 | SIEM01 | Ubuntu Server 24.04 com Wazuh | 192.168.56.20 |
 | Kali | Origem de tentativas por SSH | 192.168.56.7 |
 
-## 3. Cassuo A: falha de logon no Windows
+## 3. Caso A: falha de logon no Windows
 
 Ação: no WIN11-CLIENT, tentei locar como Adminstrador com senha errada, diretamente no teclado.
 
@@ -39,13 +38,13 @@ Campos principais do alerta:
 | data.win.eventdata.status / subStatus | 0xc000006d / 0xc000006a | Usuário ou senha incorretos |
 | rule.mitre.id | T1531 | Account Acess Removel (tática Impact) |
 
-Leitura do analista: origem local, logon interativo e um único usuário. Isso é compatível com erro de digitação, e não com ataque, Um padrão preocupante teria logonType 3 ou 10 (rede ou RDP), IP de origem externo e várias contas diferentes em sequência.
+Leitura do analista: origem local, logon interativo e um único usuário. Isso é compatível com erro de digitação, e não com ataque. Um padrão preocupante teria logonType 3 ou 10 (rede ou RDP), IP de origem externo e várias contas diferentes em sequência.
 
-Contexto do contador: o campo rule.firedtimes mostra quantas vezes aqulela regra disparou. Ele não zerou depois que apaquei os índices do Wazuh, o que indica que o contador fica o manager, separado do índice de logs.
+Contexto do contador: o campo rule.firedtimes mostra quantas vezes aquela regra disparou. Ele não zerou depois que apaquei os índices do Wazuh, o que indica que o contador fica no manager, separado do índice de logs.
 
-##. Caso B: falha de login por SSH no Linux
+## Caso B: falha de login por SSH no Linux
 
-Ação: do Kali, tentei SSH no SIEM com um usuário que não existe e senha errada, duas vezes:
+Ação: do Kali, tentei SSH no SIEM01 com um usuário que não existe e senha errada, duas vezes:
 ssh usuario@inexistente@192.168.56.220
 
 Detecção: no SIEM01, busquei no log de autenticação:
@@ -73,7 +72,7 @@ O formato muda, mas as preguntas são as mesmas: quem tentou, de onde, em qual c
 
 # 6. O que um SIEM faria com isso
 
-- Uma falha isolada é ruim. Não jsutifica alerta.
+- Uma falha isolada é ruim. Não justfiifica alerta.
 - Muitas falhas do mesmo IP em pouco tempo justificam um alerta de força bruta.
 - Várias falhas seguidas de um sucesso é o padrão mais importante: sugere que a senha foi adivinhada.
 - Falha em conta que não existe reforça a hipótese de enumeração de usuários.
